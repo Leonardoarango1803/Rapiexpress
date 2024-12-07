@@ -1,4 +1,4 @@
-package utp.proyecto.courier.back_end;
+package back_end.com.proyecto.back_end;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
