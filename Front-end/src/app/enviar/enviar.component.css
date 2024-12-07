@@ -1,0 +1,46 @@
+.nav-link {
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .nav-link.active {
+    background-color: #f8d7da;
+    font-weight: bold;
+  }
+  
+  .flex-grow-1 {
+    background-color: #f8f9fa;
+  }
+
+.nav {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    transition: 0.5s;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,.2);
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    width: 0;
+    background-color: #49777b1c;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.mensaje-exito {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #28a745;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  font-size: 16px;
+}

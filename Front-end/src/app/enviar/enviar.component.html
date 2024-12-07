@@ -1,0 +1,92 @@
+<form (ngSubmit)="enviarEnvio()" class="container mt-5 p-4 border rounded shadow-sm">
+  <h2 class="mb-4 text-center">Registrar Envío</h2>
+  
+  <!-- Campo Nombres del receptor -->
+  <div class="mb-3">
+    <label for="nombreReceptor" class="form-label">Nombres del receptor</label>
+    <input [(ngModel)]="envio.nombreReceptor" type="text" class="form-control" id="nombreReceptor" name="nombreReceptor" placeholder="Ingrese el nombre del receptor" required />
+  </div>
+  
+  <!-- Campo Apellidos del receptor -->
+  <div class="mb-3">
+    <label for="apellidosReceptor" class="form-label">Apellidos del receptor</label>
+    <input [(ngModel)]="envio.apellidosReceptor" type="text" class="form-control" id="apellidosReceptor" name="apellidosReceptor" placeholder="Ingrese los apellidos del receptor" required />
+  </div>
+
+  <!-- Campo DNI del receptor -->
+  <div class="mb-3">
+    <label for="dniReceptor" class="form-label">DNI del receptor</label>
+    <input [(ngModel)]="envio.dniReceptor" type="text" class="form-control" id="dniReceptor" name="dniReceptor" placeholder="Ingrese el DNI del receptor" required />
+  </div>
+
+  <!-- Campo Teléfono del receptor -->
+  <div class="mb-3">
+    <label for="telefonoReceptor" class="form-label">Teléfono del receptor</label>
+    <input [(ngModel)]="envio.telefonoReceptor" type="tel" class="form-control" id="telefonoReceptor" name="telefonoReceptor" placeholder="Ingrese el teléfono del receptor" required />
+  </div>
+
+  <!-- Campo Dirección del receptor -->
+  <div class="mb-3">
+    <label for="direccionReceptor" class="form-label">Dirección del receptor</label>
+    <input [(ngModel)]="envio.direccionReceptor" type="text" class="form-control" id="direccionReceptor" name="direccionReceptor" placeholder="Ingrese la dirección del receptor" required />
+  </div>
+
+  <!-- Campo Provincia origen -->
+  <div class="mb-3">
+    <label for="provinciaOrigen" class="form-label">Provincia Origen</label>
+    <select [(ngModel)]="envio.provinciaOrigen" class="form-control" id="provinciaOrigen" name="provinciaOrigen" required>
+      <option value="" disabled selected>Seleccione la provincia de destino</option>
+      <option value="ica">Ica</option>
+      <option value="nazca">Nazca</option>
+      <option value="palpa">Palpa</option>
+      <option value="chincha">Chincha</option>
+      <option value="pisco">Pisco</option>
+    </select>
+  </div>
+
+  <!-- Campo Provincia destino -->
+  <div class="mb-3">
+    <label for="provinciaDestino" class="form-label">Provincia destino</label>
+    <select [(ngModel)]="envio.provinciaDestino" class="form-control" id="provinciaDestino" name="provinciaDestino" required>
+      <option value="" disabled selected>Seleccione la provincia de destino</option>
+      <option value="ica">Ica</option>
+      <option value="nazca">Nazca</option>
+      <option value="palpa">Palpa</option>
+      <option value="chincha">Chincha</option>
+      <option value="pisco">Pisco</option>
+    </select>
+  </div>
+
+  <!-- Campo Contenido del paquete -->
+  <div class="mb-3">
+    <label for="contenido" class="form-label">Contenido</label>
+    <input [(ngModel)]="envio.contenido" type="text" class="form-control" id="contenido" name="contenido" placeholder="Ingrese el contenido del paquete" required />
+  </div>
+
+  <!-- Campo Peso (kg) -->
+  <div class="mb-3">
+    <label for="peso" class="form-label">Peso (kg)</label>
+    <input [(ngModel)]="envio.peso" type="number" class="form-control" id="peso" name="peso" placeholder="Ingrese el peso en kg" required />
+  </div>
+
+  <!-- Campo Estado de Pago -->
+  <div class="mb-3">
+    <label for="estadoPago" class="form-label">Estado de Pago</label>
+    <select [(ngModel)]="envio.estadoPago" class="form-control" id="estadoPago" name="estadoPago" required>
+      <option value="" disabled selected>Seleccione</option>
+      <option value="pendiente">Pendiente</option>
+      <option value="pagado">Pagado</option>
+    </select>
+  </div>
+  
+  <!-- Botón de Enviar -->
+  <button type="submit" class="btn btn-primary w-100">Registrar Envío</button>
+</form>
+<div
+    *ngIf="mensajeExito"
+    class="alert alert-success position-fixed top-0 end-0 m-3 mensajeExito"
+    style="z-index: 1050;"
+    role="alert"
+  >
+    ¡Envío registrado con éxito!
+  </div>

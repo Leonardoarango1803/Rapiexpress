@@ -1,0 +1,165 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-3">
+      <ul class="list-group">
+        <li 
+          class="list-group-item" 
+          [class.active]="activeSection === 'datosPersonales'" 
+          (click)="setActiveSection('datosPersonales')">
+          Mis Datos Personales
+        </li>
+        <li 
+          class="list-group-item" 
+          [class.active]="activeSection === 'modificarCuenta'" 
+          (click)="setActiveSection('modificarCuenta')">
+          Modificar mi cuenta
+        </li>
+        <li 
+          class="list-group-item" 
+          [class.active]="activeSection === 'misEnvios'" 
+          (click)="setActiveSection('misEnvios')">
+          Mis envíos
+        </li>
+        <li class="list-group-item text-danger " (click)="logout()">
+          Cerrar Sesión
+        </li>
+      </ul>
+    </div>
+    <div class="col-9">
+      <!-- Datos Personales -->
+      <div *ngIf="activeSection === 'datosPersonales'">
+        <h3>Mis Datos Personales</h3>
+        <p><strong>DNI:</strong> {{ user?.dni }}</p>
+        <p><strong>Nombre:</strong> {{ user?.nombres }}</p>
+        <p><strong>Apellidos:</strong> {{ user?.apellidos }}</p>
+        <p><strong>Teléfono:</strong> {{ user?.telefono }}</p>
+        <p><strong>Email:</strong> {{ user?.username }}</p>
+      </div>
+
+      <!-- Modificar Cuenta -->
+      <div *ngIf="activeSection === 'modificarCuenta'">
+        <h3>Modificar mi Cuenta</h3>
+        <form (ngSubmit)="updateUser()">
+          <div class="mb-3">
+            <label for="nombres" class="form-label">Nombres</label>
+            <input type="text" id="nombres" [(ngModel)]="user.nombres" name="nombres" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" id="apellidos" [(ngModel)]="user.apellidos" name="apellidos" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" id="telefono" [(ngModel)]="user.telefono" name="telefono" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+
+      <!-- Mis Envíos -->
+      <div *ngIf="activeSection === 'misEnvios'">
+        <div class="perfil-container container">
+          <!-- Buscador -->
+          <div class="search-bar mb-4 d-flex align-items-center">
+            <input
+              type="text"
+              class="form-control me-2"
+              [(ngModel)]="searchTerm"
+              placeholder="Buscar por código de rastreo"
+              (input)="filterEnvios()"
+            />
+            <button class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+              </svg>
+            </button>
+          </div>
+        
+          <!-- Lista de envíos -->
+          <div *ngIf="filteredEnvios.length > 0" class="row g-3">
+            <div *ngFor="let envio of filteredEnvios" class="col-12 col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                  <span>{{ envio.fechaCreacion | date: 'd MMMM' }}</span>
+                  <span><strong>Número:</strong> {{ envio.codigoRastreo }}</span>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-primary">Contenido: {{ envio.contenido }}</h5>
+                  <p><strong>Destinatario:</strong> {{ envio.nombreReceptor }} {{ envio.apellidosReceptor}}</p>
+                  <p><strong>DNI:</strong> {{ envio.dniReceptor }}</p>
+                  <p><strong>Teléfono:</strong> {{ envio.telefonoReceptor }}</p>
+                  <p><strong>Dirección:</strong> {{ envio.direccionReceptor }}</p>
+                  <p><strong>Origen:</strong> {{ envio.provinciaOrigen }}</p>
+                  <p><strong>Destino:</strong> {{ envio.provinciaDestino }}</p>
+                  <span 
+                    class="badge" 
+                    [ngClass]="{
+                      'status-delayed': envio.estadoPago === 'pendiente', 
+                      'status-complete': envio.estadoPago === 'pagado'}">
+                      Estado de Pago: {{ envio.estadoPago }}</span>
+                </div>
+                <!-- Botón para abrir el modal -->
+<button 
+class="btn btn-outline-primary btn-sm" 
+(click)="openModal(envio.historialEnvios)">
+Ver Historial del Envío
+</button>
+              </div>
+            </div>
+          </div>
+          <!-- Mensaje si no hay envíos -->
+          <div *ngIf="filteredEnvios.length === 0" class="alert alert-warning mt-3">
+            No se encontraron envíos con el código de rastreo proporcionado.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal1" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h5 class="modal-title">Historial del Envío</h5>
+    </div>
+    <div class="modal-body">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Estado</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let historial of estadoEnvio.historialEnvios">
+            <td>{{ historial.fechaHora | date: 'medium' }}</td>
+            <td>{{ historial.lugar }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-success': historial.estado === 'recibido',
+                  'bg-warning': historial.estado === 'ruta',
+                  'bg-danger': historial.estado === 'entregado'
+                }"
+              >
+                {{ historial.estado }}
+              </span>
+            </td>
+            <td>{{ historial.observacion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+<div class="notification" *ngIf="showNotification">
+  {{ notificationMessage }}
+</div>

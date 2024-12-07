@@ -1,0 +1,6 @@
+<app-header></app-header>
+<div class="page-container" [class.fade-in-out]="isNavigating">
+    <router-outlet (activate)="onRouteChange()"></router-outlet>
+  </div>
+<app-footer></app-footer>
+

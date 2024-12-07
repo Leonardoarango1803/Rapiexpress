@@ -1,0 +1,126 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+body {
+    background: rgba(255, 255, 255, 0.185) no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.062);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    max-width: 500px; /* Ancho */
+    width: 100%;
+    min-height: 400px; /* Largo mínimo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaciar los elementos dentro */
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Para que el formulario ocupe todo el espacio */
+    justify-content: space-between; /* Distribuir los elementos */
+}
+
+.input-box {
+    margin-bottom: 20px;
+    flex-grow: 1; /* Esto hará que los inputs crezcan */
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color: rgb(20, 11, 51);
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+p {
+    color: rgb(40, 204, 233);
+    margin-top: 10px;
+}
+
+a {
+    color: #190fa1;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  z-index: 1000;
+  color: white;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+.notification.success {
+  background-color: #4caf50; /* Verde para éxito */
+}
+
+.notification.error {
+  background-color: #f44336; /* Rojo para errores */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}

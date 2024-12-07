@@ -1,0 +1,41 @@
+<header class="header">
+  
+</header>
+<br>
+<div class="main-container">
+  <!-- Mapa -->
+  <div id="map" class="map-container"></div>
+
+  <!-- Buscador -->
+  <div class="search-container">
+    <h3>Buscar Agencia</h3>
+    <input 
+      type="text" 
+      placeholder="Escribe una provincia..." 
+      [(ngModel)]="selectedProvincia" 
+      (input)="filterAgencies()" 
+    />
+    <button class="view-map-button" (click)="resetMap()">Ver Mapa</button>
+    <h3 class="agency-list">Agencias cercanas</h3>
+    <ul class="agency-list ">
+      <li 
+        *ngFor="let agency of filteredAgencies" 
+        (click)="centerMap(agency.coords)">
+        <div class="agency-item">
+          <div class="info">
+            <h4>{{ agency.name }}</h4>
+            <p>{{ agency.address }}</p>
+            <p>Horario:</p>
+            <p>Lunes a viernes: {{ agency.schedule.weekdays }}</p>
+            <p>Sábado: {{ agency.schedule.saturday }}</p>
+            <p>Domingo: {{ agency.schedule.sunday }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2024 RapiExpress. Todos los derechos reservados.</p>
+</footer>

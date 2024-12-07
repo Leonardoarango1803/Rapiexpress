@@ -1,0 +1,55 @@
+<header>
+  <!-- Sección Superior -->
+  <div class="px-3 py-3 bg-white shadow-sm border-bottom custom-height">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between">
+        <!-- Logo y Nombre -->
+        <a href="/" class="d-flex align-items-center text-purple text-decoration-none me-4">
+          <img class="logo img-fluid me-2" src="https://t4.ftcdn.net/jpg/04/13/20/97/360_F_413209771_ZA2YI8qDK721nma8N5erkn5OIzct6hPW.jpg" alt="RAPIEXPRESS Courier" width="40" height="40">
+          <span class="fs-5 fw-bold">RAPIEXPRESS COURIER</span>
+        </a>
+
+        <!-- Contacto -->
+        <div class="d-flex align-items-center me-auto flex-shrink-1">
+          <i class="bi bi-telephone-fill text-purple me-2"></i>
+          <span class="text-dark text-nowrap">+51 987654321</span>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex align-items-center flex-shrink-0">
+          <a href="/rastreo" class="btn btn-primary text-white me-2">Sigue tu envío</a>
+          <a href="/cliente" class="btn btn-purple text-white">Seguimiento de cliente</a>
+          <a href="/perfil" class="ms-3 text-purple" title="Editar Perfil">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Navegación -->
+  <div class="bg-purple py-2 custom-height">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg d-flex flex-wrap align-items-center justify-content-center position-relative">
+        <!-- Links Centrados -->
+        <div class="d-flex justify-content-center flex-wrap w-100">
+          <a href="/home" class="nav-link text-white fw-bold px-3">Inicio</a>
+          <a *ngIf="authService.isAuthenticated()" href="/enviar" class="nav-link text-white fw-bold px-3">Registra tu Envío</a>
+          <a href="/rastreo" class="nav-link text-white fw-bold px-3">Rastrea tu paquete</a>
+          <a *ngIf="!authService.isAuthenticated()" href="/nosotros" class="nav-link text-white fw-bold px-3">Nosotros</a>
+          <a *ngIf="!authService.isAuthenticated()" href="/agencias" class="nav-link text-white fw-bold px-3">Ubícanos</a>
+          <a *ngIf="!authService.isAuthenticated()" href="/registrar" class="nav-link text-white fw-bold px-3">Registrarse</a>
+          <a *ngIf="!authService.isAuthenticated()" href="/login" class="nav-link text-white fw-bold px-3">Iniciar Sesión</a>
+          <button *ngIf="authService.isAuthenticated()" (click)="logout()" class="nav-link text-white fw-bold px-3 bg-transparent border-0">Cerrar Sesión</button>
+        </div>
+        <!-- Icono de Usuario Alineado Derecha -->
+        <a *ngIf="authService.isAuthenticated()" href="/perfil" class="position-absolute end-0 me-3 navbar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#d1d1d1" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"></path>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"></path>
+          </svg>
+        </a>
+        
+      </nav>
+    </div>
+  </div>
+</header>

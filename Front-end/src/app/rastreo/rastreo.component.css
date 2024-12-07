@@ -1,0 +1,118 @@
+body {
+    background-color: #f8f9fa;
+  }
+  .container {
+    margin-top: 50px;
+  }
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .status-complete {
+    background-color: #28a745;
+    color: white;
+  }
+  .status-pending {
+    background-color: #ffc107;
+    color: black;
+  }
+  .status-transito {
+    background-color: #30ff07;
+    color: black;
+  }
+  .status-delayed {
+    background-color: #dc3545;
+    color: white;
+  }
+
+/* detalles-envio.component.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.alert {
+  text-align: center;
+}
+
+.envio-detalles p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h3, h4 {
+  margin-top: 20px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.rastreo-container {
+  height: 100vh;
+  background-size: 120%;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  background-image: url('https://img.freepik.com/fotos-premium/vehiculo-rapido-mensajero-conduciendo-transporte-carretera-velocidad-calle-camion-entrega-camioneta-carga-furgoneta-carga-ciudad-blanco-negocio-logistico-trafico-autopista_163305-278267.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.rastreo-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.rastreo-options .btn {
+  border: none;
+  border-radius: 80px;
+}
+
+.rastreo-options .btn.active {
+  background-color: #6a11cb;
+  color: white;
+}
+
+.rastreo-form .form-control {
+  border-radius: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.rastreo-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.input-group {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bg-warning {
+  font-size: 16.5px;
+  border-radius: 10rem;
+}
+
+img.img-fluid {
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+

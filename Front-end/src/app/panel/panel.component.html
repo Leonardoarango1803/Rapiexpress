@@ -1,0 +1,126 @@
+<p>panel works!</p>
+<div class="container mt-4">
+    <!-- Sección principal -->
+    <form (ngSubmit)="actualizarEnvio()" #envioForm="ngForm">
+      <!-- Código de Rastreo y detalles principales -->
+      <div class="row mb-3 justify-content-center">
+        <div class="col-md-6 text-center">
+          <label for="codigoRastreo" class="form-label ">Código de Rastreo</label>
+          <input
+            type="text"
+            id="codigoRastreo"
+            class="form-control"
+            [(ngModel)]="envio.codigoRastreo"
+            name="codigoRastreo"
+            disabled
+          />
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="estadoPago" class="form-label">Estado de Pago</label>
+          <select
+            id="estadoPago"
+            class="form-select"
+            [(ngModel)]="envio.estadoPago"
+            name="estadoPago"
+          >
+            <option value="pendiente">Pendiente</option>
+            <option value="pagado">Pagado</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+          <input
+            type="date"
+            id="fechaEntrega"
+            class="form-control"
+            [(ngModel)]="envio.fechaEntrega"
+            name="fechaEntrega"
+          />
+        </div>
+      </div>
+  
+      <!-- Agregar historial -->
+      <div class="mb-4">
+        <label class="form-label">Agregar Historial</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Lugar"
+            [(ngModel)]="nuevoHistorial.lugar"
+            name="lugar"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Estado"
+            [(ngModel)]="nuevoHistorial.estado"
+            name="estado"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Observación"
+            [(ngModel)]="nuevoHistorial.observacion"
+            name="observacion"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="agregarHistorial()"
+          >
+            Agregar
+          </button>
+        </div>
+      </div>
+  
+      <!-- Historial del envío -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Historial del Envío</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let historial of envio.historialEnvios">
+                <td>{{ historial.fechaHora }}</td>
+                <td>{{ historial.lugar }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-primary': historial.estado === 'recibido',
+                      'bg-warning': historial.estado === 'ruta',
+                      'bg-success': historial.estado === 'entregado'
+                    }"
+                  >
+                    {{ historial.estado }}
+                  </span>
+                </td>
+                <td>{{ historial.observacion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Botón actualizar envío -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-success" [disabled]="!envioForm.valid">
+          Actualizar Envío
+        </button>
+      </div>
+    </form>
+  </div>
+  

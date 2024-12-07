@@ -1,0 +1,165 @@
+<body>
+<!-- detalles-envio.component.html -->
+<div class="rastreo-container d-flex align-items-center justify-content-center">
+  <div class="rastreo-content text-center text-white">
+    <h2>NUNCA FUE TAN FACIL</h2>
+    <div class="rastreo-options d-flex justify-content-center my-4">
+      <button class="btn btn-light mx-2">TARIFAS Y TIEMPOS</button>
+      <button class="btn btn-primary mx-2 active">RASTREA</button>
+      <button class="btn btn-light mx-2" routerLink="/enviar">ENVÍA</button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #rastreoForm="ngForm" class="rastreo-form">
+      <div class="form-group">
+        <input
+          type="text"
+          id="CodigoRastreo"
+          class="form-control"
+          [(ngModel)]="CodigoRastreo"
+          name="CodigoRastreo"
+          required
+          placeholder="Nº DE RASTREO"
+        />
+      </div>
+      <button id="rastreo"type="submit" class="btn btn-warning btn-block mt-3 input-group-append" [disabled]="rastreoForm.invalid" (click)="scrollToInfo()">
+        RASTREAR
+      </button>
+    </form>
+    <div class="rastreo-links mt-2">
+      <a href="#" class="text-white">MÚLTIPLES NÚMEROS DE RASTREO</a> |
+      <a href="#" class="text-white">¿NECESITAS AYUDA?</a>
+    </div>
+  </div>
+</div>
+
+<div id="info" class="container" > 
+  <!-- Resultados -->
+  <div *ngIf="estadoEnvio" class="mt-5 bg-light p-4 rounded shadow">
+    <h3 class="text-center text-success">Detalles del Envío</h3>
+    <div class="row bg-warning text-white p-3 rounded mt-3" >
+      <div class="col-md-3 text-center mb-3">
+        <div><strong>Fecha de Registro</strong></div>
+        <div>{{ estadoEnvio.fechaCreacion | date:'mediumDate' }}</div>
+      </div>
+      <div class="col-md-3 text-center mb-3">
+        <div><strong>Fecha de Entrega</strong></div>
+        <div>{{ estadoEnvio.fechaEntrega | date:'mediumDate' }}</div>
+      </div>
+      <div class="col-md-3 text-center mb-3">
+        <div><strong>Origen</strong></div>
+        <div>{{ estadoEnvio.provinciaOrigen }}</div>
+      </div>
+      <div class="col-md-3 text-center mb-3">
+        <div><strong>Destino</strong></div>
+        <div>{{ estadoEnvio.provinciaDestino }}</div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h5>Información del Envío:</h5>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Número de Rastreo:</strong> {{ estadoEnvio.codigoRastreo }}</li>
+        <li class="list-group-item"><strong>Receptor:</strong> {{ estadoEnvio.nombreReceptor }} {{estadoEnvio.apellidosReceptor}}</li>
+        <li class="list-group-item"><strong>Remitente:</strong> {{ estadoEnvio.usuarioid.nombres }} {{estadoEnvio.usuarioid.apellidos}}</li>
+        <li class="list-group-item"><strong>Teléfono:</strong> {{ estadoEnvio.telefonoReceptor }}</li>
+        <li class="list-group-item"><strong>Contenido:</strong> {{ estadoEnvio.contenido }}</li>
+        <li class="list-group-item"><strong>Peso:</strong> {{ estadoEnvio.peso }} kg</li>
+      </ul>
+    </div>
+
+    <!-- Estado del envío -->
+    <div class="mt-4">
+      <h5>Estado del Envío:</h5>
+      <div class="d-flex justify-content-between">
+        <div class="text-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/6384/6384768.png" alt="Registrado" class="img-fluid" width="100" />
+          <p>Registrado</p>
+          <p class="text-success" *ngIf="estadoEnvio.estado === 'registrado'">
+            ¡Tu envío ha sido registrado!
+          </p>
+        </div>
+        <div class="text-center">
+          <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/delivery-truck-design-template-e31a5cad5b37024064f40cb2ab587527_screen.jpg?ts=1626780313" alt="En Ruta" class="img-fluid" width="100" />
+          <p>En Ruta</p>
+          <p class="text-warning" *ngIf="estadoEnvio.estado === 'en_ruta'">
+            Tu envío está en camino.
+          </p>
+        </div>
+        <div class="text-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/1439/1439004.png" alt="Entregado" class="img-fluid" width="100" />
+          <p>Entregado</p>
+          <p class="text-success" *ngIf="estadoEnvio.estado === 'entregado'">
+            ¡Tu envío ha sido entregado!
+          </p>
+        </div>
+      </div>
+    </div>
+    
+  <!-- Barra de progreso -->
+  <!-- Barra de progreso -->
+  <div
+  class="progress-bar bg-success"
+  role="progressbar"
+  [style.width.%]="progreso"
+  [attr.aria-valuenow]="progreso"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  >
+  {{ progreso }}%
+</div>
+
+  <!-- Historial -->
+  <!-- Historial -->
+<h5 class="mt-4">Historial del Envío:</h5>
+<div class="card mt-4">
+  <div class="card-header text-center">
+    <h4>Información del Envío</h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Ubicación</th>
+          <th>Estado</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let historial of estadoEnvio.historialEnvios">
+          <td>{{ historial.fechaHora | date: 'medium' }}</td>
+          <td>{{ historial.lugar }}</td>
+          <td>
+            <span 
+              class="badge" 
+              [ngClass]="{
+                'status-complete': historial.estado === 'recibido',
+                'status-transito': historial.estado === 'en transito',
+                'status-pending': historial.estado === 'ruta',
+                'status-delayed': historial.estado === 'entregado'
+              }"
+            >
+              {{ historial.estado }}
+            </span>
+          </td>
+          <td>{{ historial.observacion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="alert alert-info text-center mt-4" role="alert">
+  Actualiza la página para obtener el estado más reciente de tu paquete.
+
+  <button onclick="location.reload();" class="btn btn-secondary w-100 mt-3">Recargar Página</button>
+</div>
+</div>
+  
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>           
+</div>
+</body>
+<br>

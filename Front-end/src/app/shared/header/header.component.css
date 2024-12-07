@@ -1,0 +1,36 @@
+.text-purple {
+  color: #8c52ff ;
+}
+.custom-height {
+  padding-top: 7rem; /* Aumenta o reduce según el tamaño deseado */
+  padding-bottom: 1rem;
+  width: 100%;
+  
+}
+.bg-purple {
+  background-color: #8c52ff ;
+}
+
+.btn-purple {
+  background-color: #8c52ff ;
+  border-color: #8c52ff ;
+}
+
+.nav-link {
+  white-space: nowrap; /* Evitar que los textos se rompan */
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.9rem; /* Reducir el tamaño de los botones en pantallas pequeñas */
+    padding: 0.4rem 0.8rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem; /* Reducir el tamaño de los enlaces en pantallas pequeñas */
+  }
+}
