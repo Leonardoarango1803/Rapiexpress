@@ -15,7 +15,7 @@ RapiExpress es una plataforma innovadora diseñada para ofrecer servicios de env
 
 ## Requisitos del Sistema
 ### General
-- Sistema Operativo: Windows, MacOS o Linux.
+- Sistema Operativo: Windows, /(No testeado en Mac o Linux).
 - Node.js: >= 20.18.0
 - Java: >= 17
 - MySQL: >= 8.0
@@ -23,6 +23,7 @@ RapiExpress es una plataforma innovadora diseñada para ofrecer servicios de env
 ### Herramientas necesarias:
 - Angular CLI: 18.2.9
 - Maven: >= 3.8
+- Node Js >= Node.js v20.18.0. 
 - IDE recomendado: IntelliJ IDEA para el backend, Visual Studio Code para el frontend.
 
 ## Tecnologías Utilizadas
@@ -35,6 +36,7 @@ RapiExpress es una plataforma innovadora diseñada para ofrecer servicios de env
   - Spring Boot 3.3.5
   - MySQL Connector
   - JSON Web Tokens (JWT) para autenticación
+  - Spring Security
   - Lombok
 
 ## Instalación
@@ -82,9 +84,9 @@ RapiExpress permite a los usuarios realizar las siguientes acciones:
 - Asignación de vehículos y optimización de rutas.
 - Generación de reportes en formato PDF.
 
-El sistema aborda desafíos como:
+El sistema intentara en un proximo abordar desafíos como:
 - Organización de rutas óptimas.
-- Asignación eficiente de vehículos.
+- Asignación eficiente de envios.
 - Gestión de incidencias como retrasos o daños.
 
 ## Uso
@@ -102,4 +104,6 @@ Contribuciones son bienvenidas. Por favor, siga los siguientes pasos:
 3. Realice un pull request con la descripción detallada de sus cambios.
 
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT.
+Este proyecto fue desarrollado como parte de un curso en Algoritmos y Estructuras de Datos. Su finalidad fue exclusivamente educativa y esta dispuesta a contribuciones que ayuden a mejorar su logica .
+
+Si deseas utilizar o contribuir al proyecto, por favor, contáctame previamente.
